@@ -12,11 +12,12 @@ const transporter = nodemailer.createTransport({
 });
 
 export const send_verification_email = async (email, otp_code, lastName) => {
-  const info = await transporter.sendMail({
-    from: "farazmohammad1900@gmail.com Muhammad faraz",
-    to: email,
-    subject: "OTP Verification Code",
-    html: `<!DOCTYPE html>
+  try {
+    const info = await transporter.sendMail({
+      from: "farazmohammad1900@gmail.com Muhammad faraz",
+      to: email,
+      subject: "OTP Verification Code",
+      html: `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -254,10 +255,9 @@ export const send_verification_email = async (email, otp_code, lastName) => {
       </tr>
     </table>
   </body>
-</html>
-
-
-
-    `,
-  });
+</html>`,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
